@@ -5,6 +5,7 @@ import (
 	"sort"
 
 	"github.com/mathew/advent-of-code-2022/internal/maths"
+	"github.com/mathew/advent-of-code-2022/internal/structures"
 )
 
 func main() {
@@ -14,16 +15,9 @@ func main() {
 		elfToCalories[i] = maths.Sum(inventory...)
 	}
 
-	calorieValues := []int{}
-	for _, c := range elfToCalories {
-		calorieValues = append(calorieValues, c)
-	}
-
+	calorieValues := structures.Values(elfToCalories)
 	log.Printf("Part One: %v", maths.Max(calorieValues...))
 
-	sort.Slice(calorieValues, func(i, j int) bool {
-		return calorieValues[i] > calorieValues[j]
-	})
-
+	sort.Sort(sort.Reverse(sort.IntSlice(calorieValues)))
 	log.Printf("Part Two: %v", maths.Sum(calorieValues[:3]...))
 }
