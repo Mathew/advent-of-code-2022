@@ -13,23 +13,28 @@ func TestWinnerIs(t *testing.T) {
 	assert.Equal(t, 3, scoreRPS(Paper, Paper))
 }
 
-func TestStrategyGuideTotalScore(t *testing.T) {
-	sg := NewStrategyGuide([][]string{
-		{"A", "Y"},
-		{"B", "X"},
-		{"C", "Z"},
-	}, map[string]string{
-		"A": Rock,
-		"B": Paper,
-		"C": Scissor,
-		"X": Rock,
-		"Y": Paper,
-		"Z": Scissor,
-	}, map[string]int{
-		Rock:    1,
-		Paper:   2,
-		Scissor: 3,
-	})
+var sg = NewStrategyGuide([][]string{
+	{"A", "Y"},
+	{"B", "X"},
+	{"C", "Z"},
+}, map[string]string{
+	"A": Rock,
+	"B": Paper,
+	"C": Scissor,
+	"X": Rock,
+	"Y": Paper,
+	"Z": Scissor,
+}, map[string]int{
+	Rock:    1,
+	Paper:   2,
+	Scissor: 3,
+})
 
+func TestStrategyGuideTotalScore(t *testing.T) {
 	assert.Equal(t, 15, sg.TotalScore())
+}
+
+func TestDesiredResult(t *testing.T) {
+	assert.Equal(t, 12, sg.PredictionScore())
+
 }

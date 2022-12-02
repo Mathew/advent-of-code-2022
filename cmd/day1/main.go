@@ -15,7 +15,7 @@ func main() {
 		elfToCalories[i] = maths.Sum(inventory...)
 	}
 
-	calorieValues := structures.Values(elfToCalories)
+	calorieValues := structures.MapValues(elfToCalories)
 	log.Printf("Part One: %v", maths.Max(calorieValues...))
 
 	sort.Sort(sort.Reverse(sort.IntSlice(calorieValues)))

@@ -23,4 +23,5 @@ func main() {
 		})
 
 	log.Printf("Part One: %d", sg.TotalScore())
+	log.Printf("Part Two: %d", sg.PredictionScore())
 }
