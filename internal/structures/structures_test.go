@@ -20,3 +20,11 @@ func TestMapInvert(t *testing.T) {
 
 	assert.Equal(t, exp, MapInvert(d))
 }
+
+func TestIntersection(t *testing.T) {
+	assert.Equal(
+		t,
+		[]string{"b"},
+		Intersection([]string{"a", "b", "c"}, []string{"A", "b", "C"}),
+	)
+}

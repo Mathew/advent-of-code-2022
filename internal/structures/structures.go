@@ -19,3 +19,20 @@ func MapInvert[M map[K]V, K comparable, V comparable](dict M) map[V]K {
 
 	return m
 }
+
+func Intersection[M []V, V comparable](a M, b M) M {
+	m := map[V]bool{}
+	intersects := []V{}
+
+	for _, i := range a {
+		m[i] = true
+	}
+
+	for _, j := range b {
+		if _, ok := m[j]; ok {
+			intersects = append(intersects, j)
+		}
+	}
+
+	return intersects
+}
