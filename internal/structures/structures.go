@@ -10,6 +10,16 @@ func MapValues[M map[K]V, K comparable, V any](dict M) []V {
 	return values
 }
 
+func MapKeys[M map[K]V, K comparable, V any](dict M) []K {
+	keys := make([]K, 0, len(dict))
+
+	for k := range dict {
+		keys = append(keys, k)
+	}
+
+	return keys
+}
+
 func MapInvert[M map[K]V, K comparable, V comparable](dict M) map[V]K {
 	m := map[V]K{}
 
@@ -22,7 +32,7 @@ func MapInvert[M map[K]V, K comparable, V comparable](dict M) map[V]K {
 
 func Intersection[M []V, V comparable](a M, b M) M {
 	m := map[V]bool{}
-	intersects := []V{}
+	intersects := map[V]bool{}
 
 	for _, i := range a {
 		m[i] = true
@@ -30,9 +40,9 @@ func Intersection[M []V, V comparable](a M, b M) M {
 
 	for _, j := range b {
 		if _, ok := m[j]; ok {
-			intersects = append(intersects, j)
+			intersects[j] = true
 		}
 	}
 
-	return intersects
+	return MapKeys(intersects)
 }
