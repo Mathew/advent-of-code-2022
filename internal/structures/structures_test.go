@@ -28,3 +28,7 @@ func TestIntersection(t *testing.T) {
 		Intersection([]string{"a", "b", "c"}, []string{"A", "b", "C"}),
 	)
 }
+
+func TestSequence(t *testing.T) {
+	assert.Equal(t, []int{2, 3, 4}, Sequence(2, 4))
+}

@@ -46,3 +46,13 @@ func Intersection[M []V, V comparable](a M, b M) M {
 
 	return MapKeys(intersects)
 }
+
+func Sequence(start, end int) []int {
+	is := make([]int, end-start+1)
+
+	for i := start; i < end+1; i++ {
+		is[i-start] = i
+	}
+
+	return is
+}
