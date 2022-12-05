@@ -10,7 +10,7 @@ import (
 func convertStacks(map[int][]string) map[int]*structures.Stack[string] {
 	stacks := map[int]*structures.Stack[string]{}
 
-	for no, crates := range STACKS() {
+	for no, crates := range STACKS {
 		stacks[no] = structures.NewStack(crates)
 	}
 
@@ -19,11 +19,11 @@ func convertStacks(map[int][]string) map[int]*structures.Stack[string] {
 
 func main() {
 
-	crane := crates.NewCrateMover9000(convertStacks(STACKS()))
+	crane := crates.NewCrateMover9000(convertStacks(STACKS))
 	crane.RunInstructions(MOVES)
 	log.Printf("Part one: %v", crane.TopCrates())
 
-	craneTwo := crates.NewCrateMover9001(convertStacks(STACKS()))
+	craneTwo := crates.NewCrateMover9001(convertStacks(STACKS))
 	craneTwo.RunInstructions(MOVES)
 	log.Printf("Part Two: %v", craneTwo.TopCrates())
 }

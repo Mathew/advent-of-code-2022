@@ -5,7 +5,9 @@ type Stack[T comparable] struct {
 }
 
 func NewStack[T comparable](items []T) *Stack[T] {
-	return &Stack[T]{items}
+	c := make([]T, len(items))
+	copy(c, items)
+	return &Stack[T]{c}
 }
 
 func (s *Stack[T]) Pop() T {
