@@ -17,3 +17,16 @@ func (s *Stack[T]) Pop() T {
 func (s *Stack[T]) Push(item T) {
 	s.items = append(s.items, item)
 }
+
+func (s *Stack[T]) IsEmpty() bool {
+	return len(s.items) == 0
+}
+
+func (s *Stack[T]) Glimpse() T {
+	if len(s.items) > 0 {
+		return s.items[len(s.items)-1]
+	}
+
+	var result T
+	return result
+}

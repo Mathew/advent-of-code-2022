@@ -7,13 +7,23 @@ import (
 	"github.com/mathew/advent-of-code-2022/internal/structures"
 )
 
-func main() {
+func convertStacks(map[int][]string) map[int]*structures.Stack[string] {
 	stacks := map[int]*structures.Stack[string]{}
-	for no, crates := range STACKS {
+
+	for no, crates := range STACKS() {
 		stacks[no] = structures.NewStack(crates)
 	}
 
-	crane := crates.NewCrane(stacks)
+	return stacks
+}
+
+func main() {
+
+	crane := crates.NewCrateMover9000(convertStacks(STACKS()))
 	crane.RunInstructions(MOVES)
 	log.Printf("Part one: %v", crane.TopCrates())
+
+	craneTwo := crates.NewCrateMover9001(convertStacks(STACKS()))
+	craneTwo.RunInstructions(MOVES)
+	log.Printf("Part Two: %v", craneTwo.TopCrates())
 }
