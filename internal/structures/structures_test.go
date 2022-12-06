@@ -1,6 +1,7 @@
 package structures
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -31,4 +32,9 @@ func TestIntersection(t *testing.T) {
 
 func TestSequence(t *testing.T) {
 	assert.Equal(t, []int{2, 3, 4}, Sequence(2, 4))
+}
+
+func TestSet(t *testing.T) {
+	assert.Equal(t, []string{"a", "b", "c"}, Set("a", "a", "b", "c", "a", "c"))
+	assert.Equal(t, []string{"a", "b", "c"}, Set(strings.Split("aaabbbaaacccc", "")...))
 }

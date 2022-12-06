@@ -56,3 +56,13 @@ func Sequence(start, end int) []int {
 
 	return is
 }
+
+func Set[T comparable](is ...T) []T {
+	seen := map[T]bool{}
+
+	for _, i := range is {
+		seen[i] = true
+	}
+
+	return MapKeys(seen)
+}
