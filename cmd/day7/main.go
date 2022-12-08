@@ -10,12 +10,18 @@ import (
 )
 
 func main() {
+	directorySizes := directory.Evaluate(COMMANDS)
+
 	r := maths.Sum(
 		iter.Filter(
 			func(i int) bool { return i < 100001 },
-			structures.MapValues(directory.Evaluate(COMMANDS))...,
+			structures.MapValues(directorySizes)...,
 		)...,
 	)
 
 	log.Printf("Part one: %d", r)
+	log.Printf(
+		"Part two: %d",
+		directory.SmallestViableDirectory(
+			directorySizes["/"], structures.MapValues(directorySizes)))
 }

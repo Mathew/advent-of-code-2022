@@ -100,3 +100,12 @@ func TestFolderNamingCollision(t *testing.T) {
 
 	assert.Equal(t, 95438, r)
 }
+
+func TestSmallestViableDirectory(t *testing.T) {
+	used := 48381165
+	directories := map[string]int{"/": 48381165, "/.a": 94853, "/.d": 24933642, "/.a.e": 584}
+
+	assert.Equal(t,
+		24933642,
+		SmallestViableDirectory(used, structures.MapValues(directories)))
+}

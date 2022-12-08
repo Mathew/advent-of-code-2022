@@ -44,3 +44,20 @@ func Evaluate(output []string) map[string]int {
 
 	return directorySizes
 }
+
+func SmallestViableDirectory(used int, directorySizes []int) int {
+	capacity := 70000000
+	required := 30000000
+
+	free := capacity - used
+	needed := required - free
+
+	smallest := int(^uint(0) >> 1)
+	for _, d := range directorySizes[1:] {
+		if d < smallest && d >= needed {
+			smallest = d
+		}
+	}
+
+	return smallest
+}
