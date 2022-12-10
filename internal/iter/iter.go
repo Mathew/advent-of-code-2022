@@ -11,3 +11,12 @@ func Filter[T comparable](f func(T) bool, items ...T) []T {
 
 	return result
 }
+
+func Any[T comparable](f func(T) bool, items ...T) bool {
+	for _, i := range items {
+		if f(i) {
+			return true
+		}
+	}
+	return false
+}

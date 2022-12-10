@@ -66,3 +66,21 @@ func Set[T comparable](is ...T) []T {
 
 	return MapKeys(seen)
 }
+
+func Transpose[T comparable](data [][]T) [][]T {
+	ySize := len(data[0])
+	xSize := len(data)
+
+	t := make([][]T, ySize)
+	for row := range t {
+		t[row] = make([]T, xSize)
+	}
+
+	for y := 0; y < ySize; y++ {
+		for x := 0; x < xSize; x++ {
+			t[y][x] = data[x][y]
+		}
+	}
+
+	return t
+}

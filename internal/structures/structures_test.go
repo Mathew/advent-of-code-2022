@@ -38,3 +38,18 @@ func TestSet(t *testing.T) {
 	assert.Equal(t, []string{"a", "b", "c"}, Set("a", "a", "b", "c", "a", "c"))
 	assert.Equal(t, []string{"a", "b", "c"}, Set(strings.Split("aaabbbaaacccc", "")...))
 }
+
+func TestTranspose(t *testing.T) {
+	data := [][]string{
+		{"a", "b", "c"},
+		{"1", "2", "3"},
+	}
+
+	exp := [][]string{
+		{"a", "1"},
+		{"b", "2"},
+		{"c", "3"},
+	}
+
+	assert.Equal(t, exp, Transpose(data))
+}
