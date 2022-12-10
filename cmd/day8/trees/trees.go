@@ -36,3 +36,36 @@ func (f Forest) VisibleTreesCount() int {
 
 	return visibleTrees + ((f.xSize + f.ySize - 2) * 2)
 }
+
+func calculateSightline(height int, trees []int) int {
+	viewDistance := 0
+
+	for _, tree := range trees {
+		viewDistance += 1
+
+		if tree >= height {
+			return viewDistance
+		}
+	}
+
+	return viewDistance
+}
+
+func (f Forest) BestTree() int {
+	bestSightlines := 0
+	for _, tree := range f.trees.ElementsRange(1, f.xSize-1, 1, f.ySize-1) {
+		rowTrees := f.trees.GetRow(tree.X)
+		columnTrees := f.trees.GetColumn(tree.Y)
+
+		sightlines := calculateSightline(tree.Item, columnTrees[tree.X+1:]) *
+			calculateSightline(tree.Item, structures.Reverse(columnTrees[:tree.X])) *
+			calculateSightline(tree.Item, rowTrees[tree.Y+1:]) *
+			calculateSightline(tree.Item, structures.Reverse(rowTrees[:tree.Y]))
+
+		if sightlines > bestSightlines {
+			bestSightlines = sightlines
+		}
+
+	}
+	return bestSightlines
+}

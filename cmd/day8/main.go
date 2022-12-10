@@ -7,5 +7,7 @@ import (
 )
 
 func main() {
-	log.Printf("Part one: %d", trees.NewForest(FOREST).VisibleTreesCount())
+	ts := trees.NewForest(FOREST)
+	log.Printf("Part one: %d", ts.VisibleTreesCount())
+	log.Printf("Part Two: %d", ts.BestTree())
 }

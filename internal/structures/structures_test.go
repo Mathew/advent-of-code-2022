@@ -53,3 +53,7 @@ func TestTranspose(t *testing.T) {
 
 	assert.Equal(t, exp, Transpose(data))
 }
+
+func TestReverse(t *testing.T) {
+	assert.Equal(t, []string{"c", "b", "a"}, Reverse([]string{"a", "b", "c"}))
+}
