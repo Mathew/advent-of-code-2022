@@ -20,3 +20,15 @@ func Max(ints ...int) int {
 
 	return max
 }
+
+func CapSignum(i, max int) int {
+	if i < 0 {
+		if i < -max {
+			return -max
+		}
+	} else if i > max {
+		return max
+	}
+
+	return i
+}
