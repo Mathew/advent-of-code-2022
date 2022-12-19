@@ -85,7 +85,7 @@ func Transpose[T comparable](data [][]T) [][]T {
 	return t
 }
 
-func Reverse[T comparable](items []T) []T {
+func Reverse[T any](items []T) []T {
 	n := []T{}
 
 	for i := len(items) - 1; i >= 0; i-- {

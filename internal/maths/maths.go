@@ -21,6 +21,18 @@ func Max(ints ...int) int {
 	return max
 }
 
+func Min(ints ...int) int {
+	min := ints[0]
+
+	for _, i := range ints[1:] {
+		if i < min {
+			min = i
+		}
+	}
+
+	return min
+}
+
 func CapSignum(i, max int) int {
 	if i < 0 {
 		if i < -max {

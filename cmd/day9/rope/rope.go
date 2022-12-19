@@ -6,16 +6,38 @@ import (
 
 type Rope struct {
 	tailPositionsVisited map[structures.Vector]int
-	headPosition         structures.Vector
-	tailPosition         structures.Vector
+	knotPositions        []structures.Vector
 }
 
-func NewRope() Rope {
+func NewRope(numKnots int) Rope {
+	knots := make([]structures.Vector, numKnots)
+
 	return Rope{
 		map[structures.Vector]int{structures.NewVector(0, 0): 1},
-		structures.NewVector(0, 0),
-		structures.NewVector(0, 0),
+		knots,
 	}
+}
+
+func NewRopeFromState(knots [][]int) Rope {
+	vs := []structures.Vector{}
+	for _, k := range knots {
+		vs = append(vs, structures.NewVector(k[0], k[1]))
+	}
+
+	return Rope{
+		map[structures.Vector]int{},
+		vs,
+	}
+}
+
+func (r Rope) moveKnot(prevKnot, knot, move structures.Vector) structures.Vector {
+	if prevKnot.IsTouching(knot) {
+		return knot
+	}
+	diff := prevKnot.Subtract(knot)
+	knot = knot.MoveDirection(diff, 1)
+
+	return knot
 }
 
 func (r Rope) MoveRope(direction string, distance int) Rope {
@@ -28,26 +50,26 @@ func (r Rope) MoveRope(direction string, distance int) Rope {
 	vec := vectors[direction]
 
 	for i := 0; i < distance; i++ {
-		r.headPosition = r.headPosition.Add(vec)
+		r.knotPositions[0] = r.knotPositions[0].Add(vec)
+		prevKnot := r.knotPositions[0]
 
-		if r.headPosition.IsTouching(r.tailPosition) {
-			continue
-		}
+		for kPos := 1; kPos < len(r.knotPositions); kPos++ {
+			knot := r.knotPositions[kPos]
+			newCalc := r.moveKnot(prevKnot, knot, vec)
 
-		if !r.headPosition.IsTouching(r.tailPosition) &&
-			r.headPosition.IsParallel(r.tailPosition) {
+			if newCalc != knot && kPos == len(r.knotPositions)-1 {
+				r.tailPositionsVisited[newCalc] += 1
+			}
 
-			r.tailPosition = r.tailPosition.Add(vec)
-			r.tailPositionsVisited[r.tailPosition] += 1
-		} else {
-			diff := r.headPosition.Subtract(r.tailPosition)
-			r.tailPosition = r.tailPosition.MoveDirection(diff, 1)
-			r.tailPositionsVisited[r.tailPosition] += 1
+			r.knotPositions[kPos] = newCalc
+			prevKnot = newCalc
 		}
 	}
 
-	return Rope{r.tailPositionsVisited, r.headPosition, r.tailPosition}
+	return Rope{r.tailPositionsVisited, r.knotPositions}
 }
+
+func visualSnake() {}
 
 func (r Rope) TailPositionsVisitedCount() int {
 	return len(structures.MapValues(r.tailPositionsVisited))

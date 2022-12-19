@@ -7,10 +7,16 @@ import (
 )
 
 func main() {
-	rpe := rope.NewRope()
+	rpe := rope.NewRope(2)
 	for _, m := range MOVEMENTS {
 		rpe = rpe.MoveRope(m.direction, m.distance)
 	}
 
 	log.Printf("Day one: %d", rpe.TailPositionsVisitedCount())
+
+	rpeTen := rope.NewRope(10)
+	for _, m := range MOVEMENTS {
+		rpe = rpeTen.MoveRope(m.direction, m.distance)
+	}
+	log.Printf("Day two: %d", rpeTen.TailPositionsVisitedCount())
 }

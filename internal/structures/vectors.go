@@ -40,3 +40,16 @@ func (v Vector) MoveDirection(v2 Vector, velocity int) Vector {
 	return v.Add(NewVector(maths.CapSignum(v2.x, 1), maths.CapSignum(v2.y, 1)))
 
 }
+
+func (v Vector) Coords() []int {
+	return []int{v.x, v.y}
+}
+
+func VectorsToCoords(vs ...Vector) [][]int {
+	nv := [][]int{}
+	for _, v := range vs {
+		nv = append(nv, v.Coords())
+	}
+
+	return nv
+}
