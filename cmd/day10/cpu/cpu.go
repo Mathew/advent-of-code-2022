@@ -1,5 +1,7 @@
 package cpu
 
+import "github.com/mathew/advent-of-code-2022/internal/structures"
+
 type Command interface {
 	Execute(int) int
 	IsComplete() bool
@@ -81,4 +83,26 @@ func CycleCounter(cycleMeasurements []int, cpu func() int) func() int {
 
 		return total
 	}
+}
+
+func Monitor(cpu func() int) string {
+	monitor := ""
+
+	for cycle := 0; cycle < 240; cycle++ {
+		pos := cycle % 40
+
+		if pos == 0 && cycle != 0 {
+			monitor += "\n"
+		}
+
+		pixelPos := cpu()
+
+		if len(structures.Intersection([]int{pixelPos - 1, pixelPos, pixelPos + 1}, []int{pos})) > 0 {
+			monitor += "#"
+		} else {
+			monitor += "."
+		}
+	}
+
+	return monitor
 }

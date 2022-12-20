@@ -8,7 +8,9 @@ import (
 )
 
 func main() {
-	pu := cpu.CycleCounter([]int{20, 60, 100, 140, 180, 220}, cpu.NewCPU(INPUT))
+	pu := cpu.CycleCounter([]int{20, 60, 100, 140, 180, 220}, cpu.NewCPU(getInput()))
 
 	log.Printf("Day One: %d", maths.Sum(pu(), pu(), pu(), pu(), pu(), pu()))
+	log.Printf("Day Two: ")
+	log.Printf("\n %v", cpu.Monitor(cpu.NewCPU(getInput())))
 }
